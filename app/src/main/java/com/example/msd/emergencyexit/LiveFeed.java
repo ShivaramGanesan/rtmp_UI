@@ -1,7 +1,11 @@
 package com.example.msd.emergencyexit;
 
+import android.app.Activity;
+import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +13,9 @@ import android.view.Gravity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 import org.videolan.libvlc.IVLCVout;
@@ -30,7 +37,15 @@ public class LiveFeed extends AppCompatActivity implements IVLCVout.Callback{
     private int mVideoWidth;
     private int mVideoHeight;
 
+    SeekBar seekBarBrightness;
+    private int brightness;
+    ContentResolver contentResolver;
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, FragmentsInflater.class));
+    }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
@@ -59,9 +74,39 @@ public class LiveFeed extends AppCompatActivity implements IVLCVout.Callback{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         setContentView(R.layout.activity_live_feed);
 
         mFilePath = "rtmp://192.168.43.49:1935/flash/11:admin:admin1";
+
+        seekBarBrightness = (SeekBar)findViewById(R.id.brightness);
+        seekBarBrightness.setProgress(125);
+        seekBarBrightness.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                try {
+                    brightness = Settings.System.getInt(contentResolver, String.valueOf(Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL));
+                }catch (Settings.SettingNotFoundException e){
+                    Toast.makeText(LiveFeed.this, "error", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
+                }
+                seekBarBrightness.setProgress(brightness);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         mSurface = (SurfaceView) findViewById(R.id.surface_view);
         holder = mSurface.getHolder();

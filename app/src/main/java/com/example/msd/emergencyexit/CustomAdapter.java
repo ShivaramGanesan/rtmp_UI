@@ -14,6 +14,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.specials.out.TakingOffAnimator;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private List<Cameras> list;
     Context mContext;
+    FirebaseDatabase mdatabase;
+
 
 
     @Override
@@ -35,15 +41,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
+        mdatabase = FirebaseDatabase.getInstance();
+        DatabaseReference mReference = mdatabase.getReference();
         Cameras cameras = list.get(position);
         holder.img.setImageResource(R.drawable.ic_camera_alt_black_24dp);
         holder.locationText.setText("garage");
-        if(cameras.isStatus()){
+
+        if(cameras.isStatus()==true){
+            Toast.makeText(mContext, "GREEN", Toast.LENGTH_SHORT).show();
             holder.statusImage.setImageResource(R.drawable.green);
             holder.statusImage.setColorFilter(Color.GREEN);
 
         }
-        else {
+        else if(cameras.isStatus()==false) {
+            Toast.makeText(mContext, "RED", Toast.LENGTH_SHORT).show();
             holder.statusImage.setImageResource(R.drawable.alarm);
             holder.statusImage.setColorFilter(Color.RED);
             Animation blinkAnim = AnimationUtils.loadAnimation(mContext, R.anim.blink);
@@ -54,6 +65,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             @Override
             public void onClick(View view) {
                 //Toast.makeText(mContext, "click", Toast.LENGTH_SHORT).show();
+                mContext.startActivity(new Intent(mContext, LiveFeed.class));
+            }
+        });
+        holder.locationText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.startActivity(new Intent(mContext, LiveFeed.class));
+            }
+        });
+        holder.img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 mContext.startActivity(new Intent(mContext, LiveFeed.class));
             }
         });

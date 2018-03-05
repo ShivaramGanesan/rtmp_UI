@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 public class FragmentsInflater extends AppCompatActivity {
@@ -19,6 +21,12 @@ public class FragmentsInflater extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_options, menu);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.exit(1);
     }
 
     @Override
@@ -52,12 +60,25 @@ public class FragmentsInflater extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_fragments_inflater);
 
-        Fragment gridViewFragment = new GridViewFragment();
+
+        /*Fragment gridViewFragment = new GridViewFragment();
         fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.main_container, gridViewFragment);
+        ft.commit();
+        */
+
+        Fragment listViewFragment = new ListViewFragment();
+        fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.main_container, listViewFragment);
         ft.commit();
     }
 }

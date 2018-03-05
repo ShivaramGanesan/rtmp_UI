@@ -1,5 +1,9 @@
 package com.example.msd.emergencyexit;
 
+import android.content.Context;
+import android.graphics.Camera;
+import android.widget.Toast;
+
 /**
  * Created by msd on 1/23/18.
  */
@@ -10,7 +14,9 @@ public class Cameras {
     String location;
 
     public Cameras() {
+
     }
+
 
     public Cameras(boolean status, String location) {
         this.status = status;
@@ -27,6 +33,7 @@ public class Cameras {
 
     public void setStatus(boolean status) {
         this.status = status;
+
     }
 
     public String getLocation() {

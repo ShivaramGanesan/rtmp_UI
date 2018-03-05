@@ -60,10 +60,11 @@ public class ThumbnailAdapter extends BaseAdapter {
         ImageView imageView = new ImageView(mContext);
         imageView.setImageResource(R.drawable.ic_camera_alt_black_24dp);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        if(cameras.get(pos).isStatus()) {
+        if(!cameras.get(pos).isStatus()) {
             imageView.setColorFilter(Color.RED, PorterDuff.Mode.OVERLAY);
             imageView.setAlpha(0.3f);
         }
+
         imageView.setLayoutParams(new GridView.LayoutParams(250,250));
         return imageView;
     }
