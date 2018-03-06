@@ -24,7 +24,7 @@ public class splash extends AwesomeSplash {
 
         //Customize Circular Reveal
         configSplash.setBackgroundColor(R.color.nokia_blue); //any color you want form colors.xml
-        configSplash.setAnimCircularRevealDuration(2000); //int ms
+        configSplash.setAnimCircularRevealDuration(1000); //int ms
         configSplash.setRevealFlagX(Flags.REVEAL_RIGHT);  //or Flags.REVEAL_LEFT
         configSplash.setRevealFlagY(Flags.REVEAL_BOTTOM); //or Flags.REVEAL_TOP
 
@@ -34,10 +34,11 @@ public class splash extends AwesomeSplash {
 
         //Drawable logo = getResources().getDrawable(R.drawable.nokia_logo);
         //logo.setTint(Color.WHITE);
-        /*configSplash.setLogoSplash(R.drawable.door); //or any other drawable
+
+        configSplash.setLogoSplash(R.drawable.icons_door); //or any other drawable
         configSplash.setAnimLogoSplashDuration(2000); //int ms
         configSplash.setAnimLogoSplashTechnique(Techniques.Tada); //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
-*/
+
 
         //Customize Path
         //configSplash.setPathSplash(SyncStateContract.Constants.DROID_LOGO); //set path String
@@ -52,8 +53,8 @@ public class splash extends AwesomeSplash {
 
         //Customize Title
         configSplash.setTitleSplash("NOKIA");
-        configSplash.setTitleTextColor(R.color.colorPrimaryDark);
-        configSplash.setTitleTextSize(30f); //float value
+        configSplash.setTitleTextColor(R.color.white);
+        configSplash.setTitleTextSize(20f); //float value
         configSplash.setAnimTitleDuration(2000);
         configSplash.setAnimTitleTechnique(Techniques.FlipInX);
         configSplash.setTitleFont("fonts/font_nokia.ttf"); //provide string to your font located in assets/fonts/

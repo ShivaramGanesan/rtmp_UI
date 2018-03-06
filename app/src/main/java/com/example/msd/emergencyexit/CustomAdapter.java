@@ -48,13 +48,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.locationText.setText("garage");
 
         if(cameras.isStatus()==true){
-            Toast.makeText(mContext, "GREEN", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "GREEN", Toast.LENGTH_SHORT).show();
             holder.statusImage.setImageResource(R.drawable.green);
             holder.statusImage.setColorFilter(Color.GREEN);
 
         }
         else if(cameras.isStatus()==false) {
-            Toast.makeText(mContext, "RED", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "RED", Toast.LENGTH_SHORT).show();
             holder.statusImage.setImageResource(R.drawable.alarm);
             holder.statusImage.setColorFilter(Color.RED);
             Animation blinkAnim = AnimationUtils.loadAnimation(mContext, R.anim.blink);

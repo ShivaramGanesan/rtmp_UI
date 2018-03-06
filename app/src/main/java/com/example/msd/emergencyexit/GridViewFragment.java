@@ -36,6 +36,7 @@ public class GridViewFragment extends android.app.Fragment {
 
     GridView gridView;
     List<Cameras> camerasList = new ArrayList<>();
+    ThumbnailAdapter thumbnailAdapter;
     FirebaseDatabase mDatabase;
     String status;
     //Cameras c;
@@ -45,7 +46,6 @@ public class GridViewFragment extends android.app.Fragment {
     @Override
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         gridView = (GridView)getActivity().findViewById(R.id.grid_view_fragment);
 
         mDatabase = FirebaseDatabase.getInstance();
@@ -54,11 +54,12 @@ public class GridViewFragment extends android.app.Fragment {
         //c = new Cameras();
         //c.setStatus(true);
         camerasList.add(cameras);
+        //camerasList.add(new Cameras(true, "shop"));
         //addCamera(c);
         //addCamera(true);
-       // Toast.makeText(getActivity(), "toase", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "grid activity", Toast.LENGTH_SHORT).show();
 
-       mReference.addListenerForSingleValueEvent(new ValueEventListener() {
+       mReference.addValueEventListener(new ValueEventListener() {
            @Override
            public void onDataChange(DataSnapshot dataSnapshot) {
                try {
@@ -69,13 +70,16 @@ public class GridViewFragment extends android.app.Fragment {
                    Toast.makeText(getActivity(), "" + status, Toast.LENGTH_SHORT).show();
                    if (status.equals("blocked")) {
                        addCamera(false);
+                       Toast.makeText(getActivity(), "camera status false "+cameras.isStatus(), Toast.LENGTH_SHORT).show();
 
                    } else {
                        addCamera(true);
+                       Toast.makeText(getActivity(), "camera status true "+cameras.isStatus(), Toast.LENGTH_SHORT).show();
 
                    }
                }
                catch (Exception e){
+                   Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
                    //startActivity(getActivity().getIntent());
                }
            }
@@ -87,12 +91,7 @@ public class GridViewFragment extends android.app.Fragment {
            }
        });
 
-
-
-
-
-
-
+        Toast.makeText(getActivity(), "camera status outside "+cameras.isStatus(), Toast.LENGTH_SHORT).show();
 
 
         /*for(int i=0;i<10;i++){
@@ -123,6 +122,7 @@ public class GridViewFragment extends android.app.Fragment {
 
         cameras.setStatus(bool);
         cameras.setLocation("shop");
+       // Toast.makeText(getActivity(), "camera status in function"+cameras.isStatus(), Toast.LENGTH_SHORT).show();
 
         //gridView.setAdapter(new ThumbnailAdapter());
 

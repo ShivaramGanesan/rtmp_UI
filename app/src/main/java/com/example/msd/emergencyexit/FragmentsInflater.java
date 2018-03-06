@@ -1,8 +1,14 @@
 package com.example.msd.emergencyexit;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,7 +32,7 @@ public class FragmentsInflater extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        System.exit(1);
+        finish();
     }
 
     @Override
@@ -34,7 +40,7 @@ public class FragmentsInflater extends AppCompatActivity {
 
         switch (item.getItemId())   {
             case R.id.list: {
-                Toast.makeText(this, "list", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "List View", Toast.LENGTH_SHORT).show();
                 Fragment listViewFragment = new ListViewFragment();
                 fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -43,7 +49,7 @@ public class FragmentsInflater extends AppCompatActivity {
                 break;
             }
             case R.id.grid: {
-                Toast.makeText(this, "Grid", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Grid View", Toast.LENGTH_SHORT).show();
                 Fragment gridViewFragment = new GridViewFragment();
                 fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -66,6 +72,28 @@ public class FragmentsInflater extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_fragments_inflater);
+
+        ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+
+        CheckInternetConnection checkInternetConnection = new CheckInternetConnection(this,new Intent());
+
+        if (!mWifi.isConnected()) {
+            // Do whatever
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setPositiveButton("Close App", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    finish();
+                }
+            }).setNegativeButton("Settings", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                }
+            }).setTitle("Couldn't establish connection.").setMessage("Check your connection and try again.").setCancelable(false);
+            builder.show();
+        }
 
 
         /*Fragment gridViewFragment = new GridViewFragment();

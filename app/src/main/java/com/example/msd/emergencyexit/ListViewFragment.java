@@ -46,7 +46,7 @@ public class ListViewFragment extends android.app.Fragment {
 
 
 
-    Animation blinkAnim;
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -78,20 +78,20 @@ public class ListViewFragment extends android.app.Fragment {
                     if (status.equals("blocked")) {
                         addCamera(false);
                         //c.setStatus(false,getActivity());
-                        Toast.makeText(getActivity(), "change made blocked", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "change made blocked", Toast.LENGTH_SHORT).show();
 
                     } else {
                         addCamera(true);
                         //c.setStatus(true,getActivity());
-                        Toast.makeText(getActivity(), "change made not blocked", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getActivity(), "change made not blocked", Toast.LENGTH_SHORT).show();
 
                     }
 
-                        Toast.makeText(getActivity(), "" + status, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getActivity(), "" + status, Toast.LENGTH_SHORT).show();
                 }
                 catch (Exception e){
-                    Log.d("tag", e.toString());
-                    Toast.makeText(getActivity(), "err", Toast.LENGTH_SHORT).show();
+                    //Log.d("tag", e.toString());
+                    Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
 
 
                 }

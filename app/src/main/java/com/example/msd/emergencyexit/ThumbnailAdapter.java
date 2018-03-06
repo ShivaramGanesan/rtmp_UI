@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,10 +60,20 @@ public class ThumbnailAdapter extends BaseAdapter {
 
         ImageView imageView = new ImageView(mContext);
         imageView.setImageResource(R.drawable.ic_camera_alt_black_24dp);
+        imageView.setBackgroundResource(R.drawable.round_shape);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        if(!cameras.get(pos).isStatus()) {
+        Cameras c = cameras.get(pos);
+        Toast.makeText(mContext, "adapter classs "+c.isStatus(), Toast.LENGTH_SHORT).show();
+        if(c.isStatus()==false) {
+            Toast.makeText(mContext, "falsefalse", Toast.LENGTH_SHORT).show();
             imageView.setColorFilter(Color.RED, PorterDuff.Mode.OVERLAY);
             imageView.setAlpha(0.3f);
+        }
+        else{
+            //do nothing
+            imageView.setColorFilter(Color.GREEN, PorterDuff.Mode.OVERLAY);
+            imageView.setAlpha(0.3f);
+            Toast.makeText(mContext, "else", Toast.LENGTH_SHORT).show();
         }
 
         imageView.setLayoutParams(new GridView.LayoutParams(250,250));
