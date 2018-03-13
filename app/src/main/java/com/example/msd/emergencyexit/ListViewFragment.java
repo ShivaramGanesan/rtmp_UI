@@ -1,21 +1,28 @@
 package com.example.msd.emergencyexit;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -48,6 +55,9 @@ public class ListViewFragment extends android.app.Fragment {
 
 
 
+
+
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 //        getActivity().requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -64,6 +74,7 @@ public class ListViewFragment extends android.app.Fragment {
          //c.setStatus(true);
 
         list.add(cameras);
+
 
 
 
@@ -97,6 +108,8 @@ public class ListViewFragment extends android.app.Fragment {
                 }
             }
 
+
+
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 Toast.makeText(getActivity(), "error", Toast.LENGTH_SHORT).show();
@@ -124,9 +137,11 @@ public class ListViewFragment extends android.app.Fragment {
             }
             else{
                 addCamera(false);
+
             }
         }
 */
+
 
 
 }
@@ -152,10 +167,15 @@ private void changeInstance(Cameras cameras, boolean status){
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+
+
         return inflater.inflate(R.layout.fragment_list_view, container, false);
     }
 
 
 
 
+
+
 }
+

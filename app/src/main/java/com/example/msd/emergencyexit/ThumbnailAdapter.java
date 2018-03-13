@@ -26,6 +26,8 @@ public class ThumbnailAdapter extends BaseAdapter {
 
 
 
+
+
     public ThumbnailAdapter(Context mContext) {
         this.mContext = mContext;
 
@@ -36,9 +38,7 @@ public class ThumbnailAdapter extends BaseAdapter {
         this.cameras = cameras;
     }
 
-    public  void addCamera(){
 
-    }
 
     @Override
     public int getCount() {
@@ -63,9 +63,9 @@ public class ThumbnailAdapter extends BaseAdapter {
         imageView.setBackgroundResource(R.drawable.round_shape);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Cameras c = cameras.get(pos);
-        Toast.makeText(mContext, "adapter classs "+c.isStatus(), Toast.LENGTH_SHORT).show();
+       // Toast.makeText(mContext, "adapter class "+c.isStatus(), Toast.LENGTH_SHORT).show();
         if(c.isStatus()==false) {
-            Toast.makeText(mContext, "falsefalse", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "red filter", Toast.LENGTH_SHORT).show();
             imageView.setColorFilter(Color.RED, PorterDuff.Mode.OVERLAY);
             imageView.setAlpha(0.3f);
         }
@@ -73,7 +73,7 @@ public class ThumbnailAdapter extends BaseAdapter {
             //do nothing
             imageView.setColorFilter(Color.GREEN, PorterDuff.Mode.OVERLAY);
             imageView.setAlpha(0.3f);
-            Toast.makeText(mContext, "else", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(mContext, "else green filter", Toast.LENGTH_SHORT).show();
         }
 
         imageView.setLayoutParams(new GridView.LayoutParams(250,250));

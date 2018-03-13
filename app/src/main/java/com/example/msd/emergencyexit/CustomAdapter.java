@@ -2,7 +2,12 @@ package com.example.msd.emergencyexit;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.media.ThumbnailUtils;
+import android.provider.MediaStore;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -47,8 +52,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.img.setImageResource(R.drawable.ic_camera_alt_black_24dp);
         holder.locationText.setText("garage");
 
+        Bitmap thumbnail = ThumbnailUtils.createVideoThumbnail("rtmp://192.168.43.49:1935/flash/11:admin:admin1", MediaStore.Images.Thumbnails.MINI_KIND);
+        BitmapDrawable bitmapD = new BitmapDrawable(thumbnail);
+        try{
+            holder.img.setBackground(bitmapD);
+        }catch (Exception e){
+            Toast.makeText(mContext, "error loading image", Toast.LENGTH_SHORT).show();
+        }
+
+
         if(cameras.isStatus()==true){
-            //Toast.makeText(mContext, "GREEN", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "GREEN", ToTast.LENGTH_SHORT).show();
             holder.statusImage.setImageResource(R.drawable.green);
             holder.statusImage.setColorFilter(Color.GREEN);
 

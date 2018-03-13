@@ -1,5 +1,6 @@
 package com.example.msd.emergencyexit;
 
+import android.*;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -7,8 +8,11 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,7 +22,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-public class FragmentsInflater extends AppCompatActivity {
+import java.util.jar.*;
+
+public class FragmentsInflater extends AppCompatActivity{
 
     FragmentManager fm;
     @Override
@@ -42,7 +48,11 @@ public class FragmentsInflater extends AppCompatActivity {
             case R.id.list: {
                 Toast.makeText(this, "List View", Toast.LENGTH_SHORT).show();
                 Fragment listViewFragment = new ListViewFragment();
+
+
+
                 fm = getFragmentManager();
+
                 FragmentTransaction ft = fm.beginTransaction();
                 ft.replace(R.id.main_container, listViewFragment);
                 ft.commit();
@@ -72,6 +82,8 @@ public class FragmentsInflater extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_fragments_inflater);
+
+
 
         ConnectivityManager connManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
@@ -109,4 +121,6 @@ public class FragmentsInflater extends AppCompatActivity {
         ft.replace(R.id.main_container, listViewFragment);
         ft.commit();
     }
+
+
 }

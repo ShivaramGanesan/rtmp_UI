@@ -4,11 +4,13 @@ import android.content.Context;
 import android.graphics.Camera;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 /**
  * Created by msd on 1/23/18.
  */
 
-public class Cameras {
+public class Cameras implements Serializable{
 
     boolean status;
     String location;
